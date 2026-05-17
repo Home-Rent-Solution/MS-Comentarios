@@ -1,6 +1,7 @@
 package com.HomeRentSolution.ms_comentarios.service;
 
 import com.HomeRentSolution.ms_comentarios.client.InquilinoClient;
+import com.HomeRentSolution.ms_comentarios.client.PropiedadClient;
 import com.HomeRentSolution.ms_comentarios.dto.ComentariosRequestDTO;
 import com.HomeRentSolution.ms_comentarios.dto.ComentariosResponseDTO;
 import com.HomeRentSolution.ms_comentarios.model.Comentarios;
@@ -24,7 +25,9 @@ public class ComentariosService {
     @Autowired
     private final InquilinoClient inquilinoClient;
 
-    // ── MAPEO PRIVADO: Entidad → ResponseDTO ─────────
+    @Autowired
+    private final PropiedadClient propiedadClient;
+
     private ComentariosResponseDTO mapToDTO(Comentarios comentario){
         return new ComentariosResponseDTO(
                 comentario.getIdComentario(),
@@ -35,7 +38,6 @@ public class ComentariosService {
         );
     }
 
-    // ── MAPEO PRIVADO: RequestDTO → Entidad ──────────
     private Comentarios mapToEntity(ComentariosRequestDTO dto){
         return new Comentarios(
                 null,
@@ -46,7 +48,7 @@ public class ComentariosService {
         );
     }
 
-    // ── VALIDACIÓN CON FEIGN ──────────────────────────
+    // VALIDACIÓN CON FEIGN
     private void validarInquilino(Long idInquilino){
         try {
             boolean habilitado = inquilinoClient.validarInquilino(idInquilino);
@@ -58,6 +60,17 @@ public class ComentariosService {
             throw new RuntimeException("El inquilino con ID: " + idInquilino + " no existe en ms-inquilinos");
         } catch (FeignException e) {
             throw new RuntimeException("No se puede conectar con ms-inquilinos: " + e.getMessage());
+        }
+    }
+
+    private void validarPropiedad(Long idPropiedad){
+        try {
+            propiedadClient.validarPropiedad(idPropiedad);
+            log.info(">>> Propiedad {} validada correctamente (FeignClient)", idPropiedad);
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("La propiedad con ID: " + idPropiedad + " no existe en ms-propiedades");
+        } catch (FeignException e) {
+            throw new RuntimeException("No se puede conectar con ms-propiedades: " + e.getMessage());
         }
     }
 
@@ -80,6 +93,7 @@ public class ComentariosService {
     //POST /comentarios
     public ComentariosResponseDTO save(ComentariosRequestDTO dto){
         validarInquilino(dto.getIdInquilino());
+        validarPropiedad(dto.getIdPropiedad());
         return mapToDTO(comentariosRepository.save(mapToEntity(dto)));
     }
 
@@ -87,7 +101,8 @@ public class ComentariosService {
     public ComentariosResponseDTO editar(Long idComentario, ComentariosRequestDTO dto){
         Comentarios comentarioExistente = comentariosRepository.findById(idComentario)
                 .orElseThrow(() -> new RuntimeException("El comentario con ID: " + idComentario + " no existe"));
-
+        validarInquilino(dto.getIdInquilino());
+        validarPropiedad(dto.getIdPropiedad());
         comentarioExistente.setPuntuacion(dto.getPuntuacion());
         comentarioExistente.setComentario(dto.getComentario());
         comentarioExistente.setIdPropiedad(dto.getIdPropiedad());
