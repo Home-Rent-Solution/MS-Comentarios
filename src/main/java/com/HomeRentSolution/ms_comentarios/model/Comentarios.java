@@ -19,12 +19,21 @@ public class Comentarios {
     @Column(nullable = false)
     private Integer puntuacion;
 
-    @Column(nullable = false, length = 500)
+    @Column(
+            nullable = false,
+            length = 500
+    )
     private String comentario;
 
-    @Column(name = "id_propiedad", nullable = false)
+    @Column(
+            name = "id_propiedad",
+            nullable = false
+    )
     private Long idPropiedad;
 
-    @Column(name = "id_inquilino", nullable = false)
+    @Column(
+            name = "id_inquilino",
+            nullable = false
+    )
     private Long idInquilino;
 }

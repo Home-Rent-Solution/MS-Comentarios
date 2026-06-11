@@ -10,14 +10,22 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class ComentariosModelAssembler implements RepresentationModelAssembler<ComentariosResponseDTO, EntityModel<ComentariosResponseDTO>> {
+public class ComentariosModelAssembler implements RepresentationModelAssembler<ComentariosResponseDTO,
+        EntityModel<ComentariosResponseDTO>> {
 
     @Override
     public EntityModel<ComentariosResponseDTO> toModel (ComentariosResponseDTO dto){
 
-        return EntityModel.of(dto,
-                linkTo(methodOn(ComentariosController.class).getPorId(dto.getIdComentario())).withSelfRel(),
-                linkTo(methodOn(ComentariosController.class).getComentarios()).withRel("comentarios")
+        return EntityModel.of(
+                dto,
+                linkTo(methodOn(ComentariosController
+                        .class)
+                        .getPorId(dto.getIdComentario()))
+                        .withSelfRel(),
+                linkTo(methodOn(ComentariosController
+                        .class)
+                        .getComentarios())
+                        .withRel("comentarios")
                 );
     }
 }

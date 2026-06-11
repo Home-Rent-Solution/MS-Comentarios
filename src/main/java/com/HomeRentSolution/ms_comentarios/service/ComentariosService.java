@@ -52,7 +52,10 @@ public class ComentariosService {
     private void validarInquilino(Long idInquilino){
         try {
             boolean habilitado = inquilinoClient.validarInquilino(idInquilino);
-            log.info(">>> Inquilino {} validado correctamente (FeignClient)", idInquilino);
+            log.info(
+                    ">>> Inquilino {} validado correctamente (FeignClient)",
+                    idInquilino
+            );
             if (!habilitado){
                 throw new RuntimeException("El inquilino con ID: " + idInquilino + " esta bloqueado");
             }
@@ -66,7 +69,10 @@ public class ComentariosService {
     private void validarPropiedad(Long idPropiedad){
         try {
             propiedadClient.validarPropiedad(idPropiedad);
-            log.info(">>> Propiedad {} validada correctamente (FeignClient)", idPropiedad);
+            log.info(
+                    ">>> Propiedad {} validada correctamente (FeignClient)",
+                    idPropiedad
+            );
         } catch (FeignException.NotFound e) {
             throw new RuntimeException("La propiedad con ID: " + idPropiedad + " no existe en ms-propiedades");
         } catch (FeignException e) {
@@ -77,7 +83,8 @@ public class ComentariosService {
     //***CRUD***
     //GET /comentarios
     public List<ComentariosResponseDTO> mostrarComentarios(){
-        return comentariosRepository.findAll()
+        return comentariosRepository
+                .findAll()
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -85,7 +92,8 @@ public class ComentariosService {
 
     //GET /comentarios/id
     public ComentariosResponseDTO mostrarPorId(Long idComentario){
-        Comentarios comentario = comentariosRepository.findById(idComentario)
+        Comentarios comentario = comentariosRepository
+                .findById(idComentario)
                 .orElseThrow(() -> new RuntimeException("El comentario con ID: " + idComentario + " no existe"));
         return mapToDTO(comentario);
     }
@@ -99,7 +107,8 @@ public class ComentariosService {
 
     //PUT /comentarios/id
     public ComentariosResponseDTO editar(Long idComentario, ComentariosRequestDTO dto){
-        Comentarios comentarioExistente = comentariosRepository.findById(idComentario)
+        Comentarios comentarioExistente = comentariosRepository
+                .findById(idComentario)
                 .orElseThrow(() -> new RuntimeException("El comentario con ID: " + idComentario + " no existe"));
         validarInquilino(dto.getIdInquilino());
         validarPropiedad(dto.getIdPropiedad());

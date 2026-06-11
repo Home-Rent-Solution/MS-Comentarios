@@ -13,12 +13,21 @@ public class ComentariosRequestDTO {
     // idComentario no se incluye porque MySQL lo genera
 
     @NotNull(message = "La puntuacion es obligatoria")
-    @Min(value = 1, message = "La puntuacion minima es 1")
-    @Max(value = 5, message = "La puntuacion maxima es 5")
+    @Min(
+            value = 1,
+            message = "La puntuacion minima es 1"
+    )
+    @Max(
+            value = 5,
+            message = "La puntuacion maxima es 5"
+    )
     private Integer puntuacion;
 
     @NotBlank(message = "El comentario es obligatorio")
-    @Size(max = 500, message = "El comentario no puede superar los 500 caracteres")
+    @Size(
+            max = 500,
+            message = "El comentario no puede superar los 500 caracteres"
+    )
     private String comentario;
 
     @NotNull(message = "El id de la propiedad es obligatorio")

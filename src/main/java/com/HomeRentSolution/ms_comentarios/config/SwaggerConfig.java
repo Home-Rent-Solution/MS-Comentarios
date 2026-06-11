@@ -10,9 +10,11 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI(){
-        return new OpenAPI().info(new Info()
+        return new OpenAPI()
+                .info(new Info()
                 .title("API COMENTARIOS")
                 .version("1.0")
-                .description("Documentación de la API para la gestión de los Comentarios"));
+                .description("Documentación de la API para la gestión de los Comentarios")
+                );
     }
 }

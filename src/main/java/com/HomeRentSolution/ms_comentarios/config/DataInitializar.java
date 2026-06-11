@@ -46,6 +46,9 @@ public class DataInitializar implements CommandLineRunner{
                 2L
         ));
 
-        log.info(">>> DataInitializer: {} comentarios insertados correctamente", comentariosRepository.count());
+        log.info(
+                ">>> DataInitializer: {} comentarios insertados correctamente",
+                comentariosRepository.count()
+        );
     }
 }
