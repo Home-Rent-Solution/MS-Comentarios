@@ -72,7 +72,6 @@
 			<groupId>net.datafaker</groupId>
 			<artifactId>datafaker</artifactId>
 			<version>2.4.3</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
