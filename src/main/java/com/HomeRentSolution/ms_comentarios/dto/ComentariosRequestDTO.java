@@ -18,8 +18,8 @@ public class ComentariosRequestDTO {
             message = "La puntuacion minima es 1"
     )
     @Max(
-            value = 5,
-            message = "La puntuacion maxima es 5"
+            value = 10,
+            message = "La puntuacion maxima es 10"
     )
     private Integer puntuacion;
 
