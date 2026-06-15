@@ -1,4 +1,4 @@
-package com.HomeRentSolution.ms_comentarios;
+package com.HomeRentSolution.ms_comentarios.util;
 
 import com.HomeRentSolution.ms_comentarios.model.Comentarios;
 import com.HomeRentSolution.ms_comentarios.repository.ComentariosRepository;
