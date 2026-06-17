@@ -1,0 +1,88 @@
+# CONFIGURACIÓN BASE (Común para todos)
+
+spring:
+  application:
+    name: ms-comentarios
+  profiles:
+    active: dev # Perfil activo por defecto al arrancar
+
+server:
+  port: 8080
+
+---
+
+# PERFIL DE DESARROLLO (dev)
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # Base de datos MySQL de desarrollo
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_comentarios_dev
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Estrategia de Hibernate para desarrollo
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+
+# Documentación interactiva con Swagger UI
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+# Comunicación entre microservicios (Feign) en desarrollo
+ms:
+  inquilinos:
+    url: http://localhost:8083
+  propiedades:
+    url: http://localhost:8081
+
+---
+
+# PERFIL DE PRUEBAS (test)
+
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  # Base de datos MySQL de pruebas
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_comentarios_test
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Limpieza absoluta de tablas en cada ejecución de test
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop
+
+# Desactivar Swagger en tests para acelerar el arranque
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+# URL ficticia para simular llamadas Feign en ambiente de pruebas
+ms:
+  inquilinos:
+    url: http://localhost:9999
+  propiedades:
+    url: http://localhost:9999
