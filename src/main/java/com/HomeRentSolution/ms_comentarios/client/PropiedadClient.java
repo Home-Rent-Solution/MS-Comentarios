@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
-        name = "propiedad-client",
-        url = "${ms.propiedades.url}"
+        name = "propiedad-client"
 )
 public interface PropiedadClient {
 

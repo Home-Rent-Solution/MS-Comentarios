@@ -43,12 +43,11 @@ springdoc:
     enabled: true
     path: /doc/swagger-ui.html
 
-# Comunicación entre microservicios (Feign) en desarrollo
-ms:
-  inquilinos:
-    url: http://localhost:8083
-  propiedades:
-    url: http://localhost:8081
+# ENLACE CON LA TORRE DE CONTROL EUREKA
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 ---
 
