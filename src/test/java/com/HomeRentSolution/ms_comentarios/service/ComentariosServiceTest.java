@@ -113,7 +113,7 @@ public class ComentariosServiceTest {
         );
         // Simulamos que el inquilino está habilitado y la propiedad existe
         when(inquilinoClient.validarInquilino(2L)).thenReturn(true);
-        doNothing().when(propiedadClient).validarPropiedad(10L);
+        when(propiedadClient.validarPropiedad(10L)).thenReturn(new Object());
         when(comentariosRepository.save(any(Comentarios.class))).thenReturn(comentarioGuardado);
         ComentariosResponseDTO resultado = comentariosService.save(request);
         assertNotNull(resultado);
@@ -231,7 +231,7 @@ public class ComentariosServiceTest {
 
         when(comentariosRepository.findById(1L)).thenReturn(Optional.of(comentarioExistente));
         when(inquilinoClient.validarInquilino(2L)).thenReturn(true);
-        doNothing().when(propiedadClient).validarPropiedad(10L);
+        when(propiedadClient.validarPropiedad(10L)).thenReturn(new Object());
         when(comentariosRepository.save(any(Comentarios.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
