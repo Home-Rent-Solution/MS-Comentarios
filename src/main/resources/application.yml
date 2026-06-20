@@ -4,10 +4,11 @@ spring:
   application:
     name: ms-comentarios
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: dev
 
 server:
-  port: ${SERVER_PORT:8080}
+  port: 8080
+  forward-headers-strategy: framework
 
 ---
 
@@ -20,9 +21,9 @@ spring:
 
   # Base de datos MySQL de desarrollo
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/db_comentarios_dev}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:}
+    url: jdbc:mysql://localhost:3306/db_comentarios_dev
+    username: root
+    password: ""
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Estrategia de Hibernate para desarrollo
@@ -47,7 +48,9 @@ springdoc:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
 ---
 
