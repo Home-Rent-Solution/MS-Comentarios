@@ -1,4 +1,4 @@
-# CONFIGURACIÃ“N BASE (ComÃºn para todos)
+# CONFIGURACION BASE (ComÃºn para todos)
 
 spring:
   application:
@@ -24,12 +24,6 @@ server:
   port: 8080
   forward-headers-strategy: framework
 
-ms:
-  inquilinos:
-    url: ${MS_INQUILINOS_URL:http://localhost:8083}
-  propiedades:
-    url: ${MS_PROPIEDADES_URL:http://localhost:8081}
-
 ---
 
 # PERFIL DE DESARROLLO (dev)
@@ -48,7 +42,7 @@ spring:
 
   # Estrategia de Hibernate para desarrollo
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     hibernate:
       ddl-auto: create-drop
@@ -83,14 +77,14 @@ spring:
 
   # Base de datos MySQL de pruebas
   datasource:
-    url: jdbc:mysql://localhost:3306/db_comentarios_test
-    username: root
-    password: ""
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:comentarios_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   # Limpieza absoluta de tablas en cada ejecuciÃ³n de test
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
     hibernate:
       ddl-auto: create-drop
