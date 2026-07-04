@@ -21,11 +21,7 @@ import java.util.stream.Collectors;
 public class ComentariosService {
 
     private final ComentariosRepository comentariosRepository;
-
-    @Autowired
     private final InquilinoClient inquilinoClient;
-
-    @Autowired
     private final PropiedadClient propiedadClient;
 
     private ComentariosResponseDTO mapToDTO(Comentarios comentario){
