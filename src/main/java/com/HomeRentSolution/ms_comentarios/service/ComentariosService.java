@@ -20,8 +20,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ComentariosService {
 
+    @Autowired
     private final ComentariosRepository comentariosRepository;
+
+    @Autowired
     private final InquilinoClient inquilinoClient;
+
+    @Autowired
     private final PropiedadClient propiedadClient;
 
     private ComentariosResponseDTO mapToDTO(Comentarios comentario){
