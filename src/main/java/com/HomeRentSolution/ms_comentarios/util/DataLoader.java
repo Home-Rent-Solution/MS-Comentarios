@@ -2,7 +2,6 @@ package com.HomeRentSolution.ms_comentarios.util;
 
 import com.HomeRentSolution.ms_comentarios.model.Comentarios;
 import com.HomeRentSolution.ms_comentarios.repository.ComentariosRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,17 @@ import java.util.Random;
 
 @Profile({"dev", "test"})
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class DataLoader implements CommandLineRunner {
 
 
     private final ComentariosRepository comentariosRepository;
+
+
+    @Autowired
+    public DataLoader(ComentariosRepository comentariosRepository) {
+        this.comentariosRepository = comentariosRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception{

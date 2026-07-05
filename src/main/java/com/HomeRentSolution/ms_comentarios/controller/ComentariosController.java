@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +21,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/comentarios")
-@RequiredArgsConstructor
 @Tag(
         name = "Comentarios",
         description = "Controlador para la gestión de reseñas, feedback y calificaciones de los alojamientos"
 )
 public class ComentariosController {
+    private final ComentariosService comentariosService;
+
 
     @Autowired
-    private final ComentariosService comentariosService;
+    public ComentariosController(ComentariosService comentariosService) {
+        this.comentariosService = comentariosService;
+    }
 
     //GET /comentarios
     @GetMapping

@@ -2,17 +2,22 @@ package com.HomeRentSolution.ms_comentarios.config;
 
 import com.HomeRentSolution.ms_comentarios.model.Comentarios;
 import com.HomeRentSolution.ms_comentarios.repository.ComentariosRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class DataInitializar implements CommandLineRunner{
 
     private final ComentariosRepository comentariosRepository;
+
+
+    @Autowired
+    public DataInitializar(ComentariosRepository comentariosRepository) {
+        this.comentariosRepository = comentariosRepository;
+    }
 
     @Override
     public void run(String... args){

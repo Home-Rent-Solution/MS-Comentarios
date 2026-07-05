@@ -7,7 +7,6 @@ import com.HomeRentSolution.ms_comentarios.dto.ComentariosResponseDTO;
 import com.HomeRentSolution.ms_comentarios.model.Comentarios;
 import com.HomeRentSolution.ms_comentarios.repository.ComentariosRepository;
 import feign.FeignException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +16,18 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class ComentariosService {
-
-    @Autowired
     private final ComentariosRepository comentariosRepository;
-
-    @Autowired
     private final InquilinoClient inquilinoClient;
+    private final PropiedadClient propiedadClient;
+
 
     @Autowired
-    private final PropiedadClient propiedadClient;
+    public ComentariosService(ComentariosRepository comentariosRepository, InquilinoClient inquilinoClient, PropiedadClient propiedadClient) {
+        this.comentariosRepository = comentariosRepository;
+        this.inquilinoClient = inquilinoClient;
+        this.propiedadClient = propiedadClient;
+    }
 
     private ComentariosResponseDTO mapToDTO(Comentarios comentario){
         return new ComentariosResponseDTO(
