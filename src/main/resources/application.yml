@@ -1,4 +1,4 @@
-# CONFIGURACION BASE (ComÃºn para todos)
+﻿# CONFIGURACION BASE (ComÃƒÂºn para todos)
 
 spring:
   application:
@@ -42,7 +42,7 @@ spring:
 
   # Estrategia de Hibernate para desarrollo
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: create-drop
@@ -50,7 +50,7 @@ spring:
       hibernate:
         format_sql: true
 
-# DocumentaciÃ³n interactiva con Swagger UI
+# DocumentaciÃƒÂ³n interactiva con Swagger UI
 springdoc:
   api-docs:
     enabled: true
@@ -82,9 +82,9 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
-  # Limpieza absoluta de tablas en cada ejecuciÃ³n de test
+  # Limpieza absoluta de tablas en cada ejecuciÃƒÂ³n de test
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: false
     hibernate:
       ddl-auto: create-drop
@@ -105,7 +105,7 @@ ms:
 
 ---
 
-# PERFIL DE PRODUCCIÃ“N (prod)
+# PERFIL DE PRODUCCIÃƒâ€œN (prod)
 spring:
   config:
     activate:
@@ -130,3 +130,4 @@ ms:
     url: ${MS_INQUILINOS_URL}
   propiedades:
     url: ${MS_PROPIEDADES_URL}
+
