@@ -35,7 +35,7 @@ spring:
 
   # Base de datos MySQL de desarrollo
   datasource:
-    url: jdbc:mysql://localhost:3306/db_comentarios_dev
+    url: ${DB_URL:jdbc:mysql://localhost:3306/db_comentarios?createDatabaseIfNotExist=true}
     username: root
     password: ""
     driver-class-name: com.mysql.cj.jdbc.Driver
